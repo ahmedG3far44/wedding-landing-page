@@ -166,7 +166,7 @@
       "id": "5d206e11-f12c-471e-b7e1-2b153fe52378",
       "type": "dashboard",
       "label": "Create product insights",
-      "status": "running",
+      "status": "done",
       "dependsOn": [
         "e62fd563-b777-4f97-af3e-ebae3ec54d98"
       ],
@@ -175,7 +175,15 @@
       "maxAttempts": 2,
       "enqueuedBy": "orchestrator",
       "createdAt": "2026-10-16T17:45:26.389Z",
-      "startedAt": "2026-10-16T17:48:16.190Z"
+      "startedAt": "2026-10-16T17:48:16.190Z",
+      "handoff": {
+        "goals": "Create a starter PostHog dashboard with a handful of insights built on the integration's captured events, and hand off its URL.",
+        "did": "Created the PostHog dashboard `Analytics basics (wizard)` (ID 2220239) with the required wizard tag and description. Created and attached five wizard-tagged insights based only on the eight instrumented event names: an ordered admin login-to-invitation-save funnel, invitation save reliability trend, invitation reset trend, venue directions trend, and background audio engagement trend broken down by its `action` event property. These dashboard tiles support monitoring admin conversion, editor storage reliability, reset behavior, guest venue intent, and audio engagement.",
+        "forNextAgent": "Dashboard URL: https://us.posthog.com/project/619023/dashboard/2220239. Dashboard contains five attached insights and is ready to populate when the newly instrumented events arrive. No project files were changed in this task.",
+        "filesTouched": [],
+        "evidence": "PostHog MCP `dashboard-create` returned dashboard ID 2220239 and its full project URL. Five parallel `insight-create` calls each returned saved insight metadata with a dashboard tile attached to dashboard 2220239: insight IDs 12950607, 12950604, 12950605, 12950606, and 12950608."
+      },
+      "finishedAt": "2026-10-16T17:48:53.574Z"
     },
     {
       "id": "c2091760-98f5-4fdf-b2be-008280ddc936",
