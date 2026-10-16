@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Eye, LogOut } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import { posthog } from "../../lib/posthog";
 export function AdminLayout({ children }: { children: ReactNode }) {
   const { logout } = useAuth();
   return (
@@ -18,7 +19,10 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           </Link>
           <button
             className="icon-button"
-            onClick={logout}
+            onClick={() => {
+              posthog?.capture("admin_logged_out");
+              logout();
+            }}
             aria-label="تسجيل الخروج"
           >
             <LogOut size={20} />

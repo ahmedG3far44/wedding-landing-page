@@ -15,6 +15,24 @@ if ((!projectToken || !host) && import.meta.env.DEV) {
 
 export const posthog = projectToken && host ? posthogClient : undefined;
 
+export const posthogLogger = {
+  info: (message: string, attributes: Record<string, string | number | boolean>) =>
+    posthog?.logger.info(message, attributes),
+  error: (message: string, attributes: Record<string, string | number | boolean>) =>
+    posthog?.logger.error(message, attributes),
+};
+
 if (projectToken && host) {
-  posthogClient.init(projectToken, { api_host: host });
+  posthogClient.init(projectToken, {
+    api_host: host,
+    capture_exceptions: {
+      capture_unhandled_errors: true,
+      capture_unhandled_rejections: true,
+      capture_console_errors: false,
+    },
+    logs: {
+      serviceName: "wedding-invitation-web",
+      environment: import.meta.env.MODE,
+    },
+  });
 }

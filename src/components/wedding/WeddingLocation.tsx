@@ -1,6 +1,7 @@
 import { ArrowUpLeft, MapPin } from "lucide-react";
 import { useInvitation } from "../../hooks/useInvitation";
 import { Ornament } from "../ui/Ornament";
+import { posthog } from "../../lib/posthog";
 export function WeddingLocation() {
   const { content: c } = useInvitation();
   const url =
@@ -24,7 +25,13 @@ export function WeddingLocation() {
         <Ornament />
         <p>{c.location.address}</p>
         <p className="location-note">{c.invitation.attendanceText}</p>
-        <a className="button" href={url} target="_blank" rel="noreferrer">
+        <a
+          className="button"
+          href={url}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => posthog?.capture("directions_opened")}
+        >
           <MapPin size={17} />
           الموقع والاتجاهات
           <ArrowUpLeft size={16} />

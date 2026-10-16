@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
+import { posthog } from "../../lib/posthog";
 
 export function BackgroundAudio() {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -35,9 +36,11 @@ export function BackgroundAudio() {
     const audio = audioRef.current;
     if (!audio) return;
     if (!audio.paused) {
+      posthog?.capture("background_audio_toggled", { action: "paused" });
       userPaused.current = true;
       audio.pause();
     } else {
+      posthog?.capture("background_audio_toggled", { action: "played" });
       userPaused.current = false;
       void audio.play().catch(() => setPlaying(false));
     }

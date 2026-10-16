@@ -5,6 +5,7 @@ import { Eye, EyeOff, LockKeyhole } from "lucide-react";
 import { toast } from "sonner";
 import { useAuth } from "../context/AuthContext";
 import { Ornament } from "../components/ui/Ornament";
+import { posthog } from "../lib/posthog";
 export function AdminLoginPage() {
   const [visible, setVisible] = useState(false);
   const { login } = useAuth();
@@ -24,9 +25,13 @@ export function AdminLoginPage() {
         <form
           onSubmit={handleSubmit((v) => {
             if (login(v.username, v.password)) {
+              posthog?.capture("admin_login_succeeded");
               toast.success("مرحباً بك");
               navigate("/admin");
-            } else toast.error("اسم المستخدم أو كلمة المرور غير صحيحة");
+            } else {
+              posthog?.capture("admin_login_failed");
+              toast.error("اسم المستخدم أو كلمة المرور غير صحيحة");
+            }
           })}
         >
           <label>

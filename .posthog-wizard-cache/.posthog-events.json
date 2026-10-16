@@ -1,0 +1,42 @@
+[
+  {
+    "event": "admin_login_succeeded",
+    "description": "An administrator successfully submits the local login form.",
+    "file": "src/pages/AdminLoginPage.tsx"
+  },
+  {
+    "event": "admin_login_failed",
+    "description": "An administrator submits invalid local login credentials.",
+    "file": "src/pages/AdminLoginPage.tsx"
+  },
+  {
+    "event": "admin_logged_out",
+    "description": "An administrator selects the logout control.",
+    "file": "src/components/admin/AdminLayout.tsx"
+  },
+  {
+    "event": "invitation_content_saved",
+    "description": "An administrator successfully saves invitation edits to browser storage.",
+    "file": "src/components/admin/InvitationEditor.tsx"
+  },
+  {
+    "event": "invitation_content_save_failed",
+    "description": "An administrator attempts to save invitation edits but browser storage fails.",
+    "file": "src/components/admin/InvitationEditor.tsx"
+  },
+  {
+    "event": "invitation_content_reset",
+    "description": "An administrator confirms restoring default invitation content.",
+    "file": "src/components/admin/InvitationEditor.tsx"
+  },
+  {
+    "event": "directions_opened",
+    "description": "A guest opens the venue directions link.",
+    "file": "src/components/wedding/WeddingLocation.tsx"
+  },
+  {
+    "event": "background_audio_toggled",
+    "description": "A guest explicitly starts or stops the invitation background audio.",
+    "file": "src/components/wedding/BackgroundAudio.tsx"
+  }
+]

@@ -5,6 +5,7 @@ import { Save, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 import { useInvitation } from "../../hooks/useInvitation";
 import { defaultContent } from "../../lib/storage";
+import { posthog, posthogLogger } from "../../lib/posthog";
 import {
   invitationSchema,
   type InvitationContent,
@@ -109,8 +110,18 @@ export function InvitationEditor() {
           try {
             save(v);
             reset(v);
+            posthog?.capture("invitation_content_saved");
+            posthogLogger.info("invitation configuration saved", {
+              operation: "save",
+              storage: "local_storage",
+            });
             toast.success("تم حفظ التعديلات بنجاح");
           } catch {
+            posthog?.capture("invitation_content_save_failed");
+            posthogLogger.error("invitation configuration storage failed", {
+              operation: "save",
+              storage: "local_storage",
+            });
             toast.error("تعذر الحفظ. تحقق من مساحة التخزين وإعدادات المتصفح.");
           }
         },
@@ -214,8 +225,17 @@ export function InvitationEditor() {
                 try {
                   resetContent();
                   reset(defaultContent);
+                  posthog?.capture("invitation_content_reset");
+                  posthogLogger.info("invitation configuration reset", {
+                    operation: "reset",
+                    storage: "local_storage",
+                  });
                   toast.success("تمت استعادة الإعدادات الافتراضية");
                 } catch {
+                  posthogLogger.error("invitation configuration storage failed", {
+                    operation: "reset",
+                    storage: "local_storage",
+                  });
                   toast.error("تعذر الوصول إلى التخزين");
                 }
               }
