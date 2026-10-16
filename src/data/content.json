@@ -1,0 +1,40 @@
+{
+  "site": {
+    "title": "دعوة زفاف",
+    "description": "نتشرف بدعوتكم لحضور حفل زفافنا",
+    "language": "ar",
+    "direction": "rtl"
+  },
+  "couple": {
+    "groomName": "أحمد",
+    "brideName": "سارة"
+  },
+  "invitation": {
+    "bismillah": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+    "introText": "بكل الحب والفرح",
+    "mainText": "يسرّنا دعوتكم لمشاركتنا فرحة زفاف",
+    "attendanceText": "وتكتمل فرحتنا بحضوركم الكريم",
+    "closingText": "بحضوركم تكتمل سعادتنا، وبمشاركتكم تصبح لحظاتنا أجمل."
+  },
+  "wedding": {
+    "date": "2027-01-15",
+    "time": "19:00",
+    "timezone": "Africa/Cairo",
+    "displayDate": "الجمعة ١٥ يناير ٢٠٢٧",
+    "displayTime": "السابعة مساءً"
+  },
+  "location": {
+    "venueName": "قاعة الأفراح الملكية",
+    "address": "الإسكندرية، مصر",
+    "googleMapsUrl": "",
+    "mapEmbedUrl": ""
+  },
+  "countdown": {
+    "enabled": true,
+    "title": "العد التنازلي لليلة العمر",
+    "completedMessage": "اليوم يوم فرحتنا!"
+  },
+  "footer": {
+    "message": "وجودكم معنا يزيد فرحتنا"
+  }
+}

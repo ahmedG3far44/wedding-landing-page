@@ -1,0 +1,1053 @@
+@import "tailwindcss";
+
+.audio-toggle {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--wedding-gold);
+  border-radius: 50%;
+  background: #fffcf7ed;
+  color: var(--wedding-gold-dark);
+  box-shadow: 0 4px 20px #66543c18;
+  backdrop-filter: blur(12px);
+}
+.audio-toggle:hover { background: var(--wedding-champagne); }
+
+:root {
+  --wedding-bg: #f8f4ec;
+  --wedding-pearl: #fffcf7;
+  --wedding-champagne: #e8d8b8;
+  --wedding-gold: #c6a66b;
+  --wedding-gold-dark: #a8874b;
+  --wedding-text: #66543c;
+  --wedding-muted: #94846b;
+  font-family: "Amiri", serif;
+  color: var(--wedding-text);
+  background: var(--wedding-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 28px;
+}
+body {
+  margin: 0;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button,
+a,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a {
+  touch-action: manipulation;
+}
+button {
+  cursor: pointer;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--wedding-gold-dark);
+  outline-offset: 5px;
+}
+::selection {
+  background: #e8d8b8;
+}
+h2 {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.7;
+}
+.invitation-page {
+  overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 95% 20%, #e4d4b32b, transparent 45%),
+    var(--wedding-bg);
+}
+.hero {
+  min-height: 100svh;
+  padding: 30px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background:
+    radial-gradient(
+      ellipse at 50% 40%,
+      #fffdfa 0%,
+      #faf6ee85 48%,
+      transparent 70%
+    ),
+    repeating-linear-gradient(
+      119deg,
+      #c3ac7e0a 0%,
+      #fffdf899 11%,
+      #c3ac7e0b 19%,
+      #faf7ee 28%
+    );
+}
+.hero:before,
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 46vw;
+  height: 110%;
+  top: -10%;
+  border-radius: 50%;
+  border-right: 1px solid #bda47626;
+  box-shadow: 24px 0 50px #c7b58e0b;
+  transform: rotate(27deg);
+  pointer-events: none;
+}
+.hero:before {
+  left: -23vw;
+}
+.hero:after {
+  right: -26vw;
+  transform: rotate(-26deg);
+}
+.hero-caption {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--wedding-gold-dark);
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.hero-caption span {
+  height: 1px;
+  width: 36px;
+  background: #c6a66b66;
+}
+.invitation-card {
+  position: relative;
+  width: min(100%, 660px);
+  padding: 13px;
+  border: 1px solid #c6a66b70;
+  background: linear-gradient(125deg, #ffffff8f, #fffcf75c 55%, #f1e8d933);
+  box-shadow:
+    0 22px 80px #9579480b,
+    inset 0 0 50px #fff8;
+  backdrop-filter: blur(10px);
+}
+.card-inner {
+  position: relative;
+  border: 1px solid #c6a66b45;
+  text-align: center;
+  padding: 40px 25px 34px;
+}
+.corner {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-color: var(--wedding-gold);
+  opacity: 0.75;
+}
+.corner:after {
+  content: "✧";
+  position: absolute;
+  font-size: 23px;
+  line-height: 1;
+  color: var(--wedding-gold);
+}
+.top-right {
+  top: 7px;
+  right: 7px;
+  border-top: 1px solid;
+  border-right: 1px solid;
+}
+.top-right:after {
+  top: -8px;
+  right: -7px;
+}
+.top-left {
+  top: 7px;
+  left: 7px;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.top-left:after {
+  top: -8px;
+  left: -7px;
+}
+.bottom-right {
+  bottom: 7px;
+  right: 7px;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.bottom-right:after {
+  bottom: -8px;
+  right: -7px;
+}
+.bottom-left {
+  bottom: 7px;
+  left: 7px;
+  border-bottom: 1px solid;
+  border-left: 1px solid;
+}
+.bottom-left:after {
+  bottom: -8px;
+  left: -7px;
+}
+.bismillah {
+  font-size: 22px;
+  line-height: 1.8;
+  color: #92733f;
+}
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--wedding-gold);
+  margin: 17px 0;
+  font-size: 12px;
+}
+.ornament span {
+  width: 43px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c6a66b80, transparent);
+}
+.ornament i {
+  font-style: normal;
+  font-size: 25px;
+  line-height: 1;
+}
+.intro {
+  font-size: 22px;
+  margin-top: 27px;
+}
+.main-text {
+  font-size: 18px;
+  margin-top: 9px;
+  color: #81715c;
+}
+.couple {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  margin: 8px 0 18px;
+  line-height: 1.8;
+  font-weight: 400;
+  color: #a78442;
+}
+.name {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-size: clamp(66px, 9vw, 102px);
+  text-shadow: 0 2px 20px #d8bd7d26;
+}
+.ampersand {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-size: 35px;
+  color: #c6a66b;
+  transform: translateY(12px);
+}
+.attendance {
+  font-size: 18px;
+  color: #81715c;
+}
+.hero-date {
+  font-size: 20px;
+  letter-spacing: 0.4px;
+  margin-top: 18px;
+}
+.hero-venue {
+  font-size: 15px;
+  color: var(--wedding-muted);
+  margin-top: 7px;
+}
+.hero-venue span {
+  margin: 0 7px;
+}
+.scroll-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #9d8969;
+  margin-top: 24px;
+}
+.scroll-link svg {
+  animation: drift 3s ease-in-out infinite;
+}
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+.particles i {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #c6a66b75;
+  border-radius: 50%;
+  animation: float 14s ease-in-out infinite;
+  box-shadow: 0 0 7px #d7b16d66;
+}
+.section {
+  max-width: 1080px;
+  margin: auto;
+  padding: 85px 40px;
+  text-align: center;
+  position: relative;
+}
+.eyebrow {
+  font-size: 14px;
+  color: var(--wedding-gold-dark);
+  letter-spacing: 1px;
+  margin-bottom: 7px;
+}
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 45px;
+}
+.detail-item {
+  padding: 12px 25px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.detail-item + .detail-item {
+  border-inline-start: 1px solid #d9c9a866;
+}
+.detail-item svg {
+  color: var(--wedding-gold-dark);
+  margin-bottom: 16px;
+}
+.detail-label {
+  font-size: 14px;
+  color: var(--wedding-muted);
+  margin-bottom: 8px;
+}
+.detail-item h3 {
+  font-size: 22px;
+  font-weight: 400;
+}
+.detail-item > p:last-child:not(.detail-label) {
+  font-size: 16px;
+  color: var(--wedding-muted);
+  margin-top: 4px;
+}
+.countdown-section {
+  background: linear-gradient(110deg, #eee4d44d, #ede3d66b, #eee4d44d);
+  border-block: 1px solid #d9c9a844;
+  position: relative;
+}
+.countdown-section:before {
+  content: "✧";
+  position: absolute;
+  top: 17px;
+  left: 50%;
+  color: #c6a66b88;
+}
+.countdown-section .section {
+  padding-block: 65px;
+}
+.countdown {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  gap: 45px;
+  direction: rtl;
+}
+.countdown > div {
+  display: flex;
+  flex-direction: column;
+  min-width: 95px;
+  position: relative;
+}
+.countdown > div + div:after {
+  content: ":";
+  font-family: "Cormorant Garamond", serif;
+  position: absolute;
+  right: -26px;
+  top: 8px;
+  color: #baa784;
+  font-size: 38px;
+}
+.countdown strong {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 66px;
+  line-height: 1.2;
+  color: #9d7d43;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+.countdown span {
+  font-size: 15px;
+  color: #93816a;
+  margin-top: 9px;
+}
+.completed {
+  font-size: 28px;
+  margin-top: 30px;
+}
+.location {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 70px;
+  padding-block: 90px;
+}
+.location-copy {
+  text-align: start;
+}
+.location-copy .ornament {
+  justify-content: flex-start;
+}
+.location-copy > p:not(.eyebrow) {
+  font-size: 20px;
+}
+.location-copy .location-note {
+  color: var(--wedding-muted);
+  font-size: 17px !important;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+.venue-art {
+  min-height: 315px;
+  background: radial-gradient(ellipse at 50% 80%, #ece1cc8c, transparent 65%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.arch {
+  width: 220px;
+  height: 275px;
+  border: 1px solid #c6a66b73;
+  border-radius: 120px 120px 0 0;
+  padding: 12px;
+  position: relative;
+}
+.arch:before,
+.arch:after {
+  content: "❧";
+  position: absolute;
+  font-size: 110px;
+  color: #b5a07177;
+  bottom: -3px;
+  left: -69px;
+  transform: rotate(-30deg);
+}
+.arch:after {
+  left: auto;
+  right: -69px;
+  transform: scaleX(-1) rotate(-30deg);
+}
+.arch-inner {
+  height: 100%;
+  border: 1px solid #c6a66b45;
+  border-radius: 100px 100px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  color: #b79a64;
+  background: linear-gradient(110deg, #fff7, transparent, #fff7);
+}
+.arch-inner > span {
+  font-size: 45px;
+}
+.art-lines {
+  width: 65px;
+  height: 12px;
+  border-block: 1px solid #c6a66b66;
+}
+.venue-art-caption {
+  font-family: "Aref Ruqaa Ink";
+  font-size: 24px;
+  margin-top: 16px;
+  color: #a98a53;
+}
+.button {
+  border: 1px solid var(--wedding-gold-dark);
+  background: #aa8b52;
+  color: #fffdf7;
+  min-height: 46px;
+  padding: 10px 23px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.button:hover {
+  background: #927440;
+  transform: translateY(-1px);
+}
+.secondary {
+  background: transparent;
+  color: #8b7145;
+  border-color: #cbb88f;
+}
+.secondary:hover {
+  background: #eee3cf;
+}
+.map {
+  grid-column: 1/-1;
+  width: 100%;
+  height: 330px;
+  border: 1px solid #c6a66b55;
+}
+.closing {
+  border-top: 1px solid #c6a66b30;
+  padding-block: 65px;
+}
+.closing > p {
+  font-size: clamp(20px, 3vw, 25px);
+  max-width: 600px;
+  margin: 24px auto;
+  line-height: 2;
+}
+.closing-names {
+  font-family: "Aref Ruqaa Ink", serif;
+  font-size: 42px;
+  color: #a78442;
+}
+.closing-names span {
+  font-size: 26px;
+  margin-inline: 12px;
+}
+.small-star {
+  display: block;
+  color: #b99b60;
+  font-size: 22px;
+  margin-top: 20px;
+}
+footer {
+  text-align: center;
+  padding: 28px 24px 32px;
+  border-top: 1px solid #c6a66b26;
+  background: #eee5d52b;
+  font-size: 16px;
+}
+footer span {
+  font-size: 13px;
+  color: var(--wedding-muted);
+  display: block;
+  margin-top: 5px;
+}
+.login-page {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 20% 20%, #e8d8b85c, transparent 60%),
+    var(--wedding-bg);
+}
+.login-card {
+  width: min(100%, 470px);
+  padding: 42px;
+  border: 1px solid #c6a66b70;
+  outline: 1px solid #c6a66b33;
+  outline-offset: -9px;
+  background: #fffcf7b3;
+  box-shadow: 0 25px 80px #66543c0a;
+  text-align: center;
+  animation: entrance 0.7s ease both;
+}
+.login-icon {
+  margin: auto auto 20px;
+  color: var(--wedding-gold-dark);
+}
+.login-card h1 {
+  font-family: "Aref Ruqaa Ink";
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+.login-card > p {
+  color: var(--wedding-muted);
+  font-size: 16px;
+}
+.login-card form {
+  text-align: start;
+  display: grid;
+  gap: 17px;
+  margin-top: 25px;
+}
+label {
+  display: block;
+  font-size: 16px;
+}
+input:not([type="checkbox"]),
+textarea,
+select {
+  display: block;
+  width: 100%;
+  border: 1px solid #d7c8ad;
+  background: #fffdf9;
+  color: var(--wedding-text);
+  padding: 11px 13px;
+  border-radius: 2px;
+  outline: none;
+  min-height: 46px;
+  margin-top: 7px;
+  font-family: "Amiri", serif;
+  font-size: 17px;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #a8874b;
+  box-shadow: 0 0 0 3px #c6a66b16;
+}
+input[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: #b34c45;
+}
+textarea {
+  resize: vertical;
+}
+.password-field {
+  position: relative;
+}
+.password-field input {
+  padding-right: 44px;
+}
+.password-field button {
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: #9b855f;
+}
+small[role="alert"] {
+  color: #a33b35;
+  font-size: 14px;
+  display: block;
+  margin-top: 5px;
+}
+.back-link {
+  display: inline-block;
+  margin-top: 24px;
+  color: #94846b;
+  font-size: 15px;
+}
+.admin-page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 40px 32px 60px;
+}
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid #d8c8a9;
+  padding-bottom: 25px;
+}
+.admin-header h1 {
+  font-family: "Aref Ruqaa Ink";
+  font-weight: 400;
+  font-size: 34px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.icon-button {
+  background: none;
+  border: 1px solid #d7c8ad;
+  color: #947644;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+}
+.storage-note {
+  font-size: 14px;
+  color: #94846b;
+  margin: 22px 0 32px;
+}
+.editor-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 35px;
+  align-items: start;
+}
+.editor-nav {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.editor-nav > p {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.editor-nav a {
+  padding: 10px 13px;
+  font-size: 16px;
+  border-inline-start: 1px solid #d8c8a9;
+}
+.editor-nav a:hover {
+  background: #eee5d5;
+}
+.editor-nav a span,
+.editor-section h2 span {
+  font-family: "DM Sans";
+  font-size: 12px;
+  color: #aa8b52;
+  margin-inline-end: 14px;
+}
+.save-status {
+  padding: 18px 12px;
+  font-size: 14px;
+  color: #70815e;
+}
+.save-status.dirty {
+  color: #b28332;
+}
+.editor-section {
+  padding: 30px;
+  background: #fffcf7b3;
+  border: 1px solid #dfd3be;
+  margin-bottom: 22px;
+  scroll-margin-top: 24px;
+}
+.editor-section h2 {
+  font-family: "Amiri";
+  font-size: 24px;
+  border-bottom: 1px solid #e6dccb;
+  padding-bottom: 17px;
+  margin-bottom: 22px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 21px;
+}
+.wide,
+.checkbox-label {
+  grid-column: 1/-1;
+}
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+input[type="checkbox"] {
+  accent-color: #aa8b52;
+  width: 18px;
+  height: 18px;
+}
+.editor-actions {
+  position: sticky;
+  bottom: 12px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 15px;
+  background: #fffcf7ed;
+  border: 1px solid #d8c8a9;
+  backdrop-filter: blur(12px);
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(12px, -35px);
+    opacity: 0.6;
+  }
+}
+@keyframes drift {
+  50% {
+    transform: translateY(4px);
+  }
+}
+@keyframes entrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (min-width: 1500px) {
+  .hero {
+    padding-block: 45px;
+  }
+  .card-inner {
+    padding-block: 50px;
+  }
+  .couple {
+    margin-block: 18px 26px;
+  }
+  .hero-caption {
+    margin-bottom: 30px;
+  }
+}
+@media (max-width: 700px) {
+  .hero {
+    padding: 24px 19px 22px;
+  }
+  .hero-caption {
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  .invitation-card {
+    padding: 8px;
+  }
+  .card-inner {
+    padding: 32px 14px 28px;
+  }
+  .bismillah {
+    font-size: 19px;
+  }
+  .intro {
+    font-size: 20px;
+    margin-top: 23px;
+  }
+  .main-text {
+    font-size: 16px;
+  }
+  .couple {
+    gap: 19px;
+    margin: 20px 0 25px;
+  }
+  .name {
+    font-size: 68px;
+  }
+  .ampersand {
+    font-size: 27px;
+  }
+  .attendance {
+    font-size: 16px;
+  }
+  .hero-date {
+    font-size: 18px;
+  }
+  .hero-venue {
+    font-size: 13px;
+  }
+  .section {
+    padding: 58px 22px;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 25px;
+  }
+  .detail-item {
+    padding: 22px 15px;
+  }
+  .detail-item + .detail-item {
+    border-inline-start: none;
+    border-top: 1px solid #d9c9a866;
+    max-width: 290px;
+    width: 100%;
+    margin: auto;
+  }
+  .detail-item h3 {
+    font-size: 22px;
+  }
+  .countdown {
+    gap: 18px;
+    margin-top: 25px;
+  }
+  .countdown > div {
+    min-width: 58px;
+  }
+  .countdown strong {
+    font-size: 46px;
+  }
+  .countdown > div + div:after {
+    font-size: 25px;
+    right: -13px;
+    top: 8px;
+  }
+  .countdown span {
+    font-size: 14px;
+  }
+  .countdown-section .section {
+    padding-block: 50px;
+  }
+  .countdown-section h2 {
+    font-size: 28px;
+  }
+  .location {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .location-copy {
+    text-align: center;
+  }
+  .location-copy .ornament {
+    justify-content: center;
+  }
+  .venue-art {
+    min-height: 290px;
+  }
+  .arch {
+    height: 245px;
+    width: 200px;
+  }
+  .closing > p {
+    font-size: 21px;
+  }
+  .admin-page {
+    padding: 24px 16px;
+  }
+  .admin-header {
+    align-items: flex-start;
+  }
+  .admin-header h1 {
+    font-size: 26px;
+  }
+  .header-actions {
+    gap: 8px;
+  }
+  .header-actions .button {
+    font-size: 13px;
+    padding: 8px 10px;
+    gap: 7px;
+  }
+  .header-actions .button svg {
+    display: none;
+  }
+  .editor-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .editor-nav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .editor-nav > p {
+    display: none;
+  }
+  .editor-nav a {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  .editor-nav a span {
+    display: none;
+  }
+  .save-status {
+    width: 100%;
+    padding: 15px 0 0;
+  }
+  .editor-section {
+    padding: 22px 18px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .editor-actions {
+    gap: 8px;
+    padding: 10px;
+  }
+  .editor-actions .button {
+    font-size: 14px;
+    padding: 9px 12px;
+  }
+  .login-card {
+    padding: 35px 25px;
+  }
+  .storage-note {
+    line-height: 1.9;
+  }
+  .hero-venue {
+    overflow-wrap: anywhere;
+  }
+  .name {
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .couple {
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+.loading-state {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: var(--wedding-gold-dark);
+}
+@font-palette-values --wedding-ink {
+  font-family: "Aref Ruqaa Ink";
+  override-colors:
+    0 #a8874b,
+    1 #c6a66b;
+}
+h1,
+h2,
+.name,
+.ampersand,
+.closing-names,
+.venue-art-caption {
+  font-palette: --wedding-ink;
+}
