@@ -25,3 +25,4 @@ dist-ssr
 
 # Browser verification screenshots
 tests/*.png
+.env

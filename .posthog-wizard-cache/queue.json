@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "runId": "4f681f42-c8d9-4916-8971-5b0160e654a9",
+  "tasks": [
+    {
+      "id": "47818c64-82e8-413e-a7eb-512cee281e3a",
+      "type": "install",
+      "label": "Add PostHog SDK",
+      "status": "done",
+      "dependsOn": [],
+      "inputs": {},
+      "attempts": 1,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:12.183Z",
+      "startedAt": "2026-10-16T17:45:35.143Z",
+      "handoff": {
+        "goals": "Install the JavaScript web PostHog SDK with the project's package manager so the resolved published package is recorded in the manifest and lockfile.",
+        "did": "Detected npm using the wizard package-manager tool and ran `npm add posthog-js`. npm resolved and installed `posthog-js` at `^1.438.12`, recording it in `package.json` and `package-lock.json`. This Vite/React project's manifest indicates browser-side code only, so no server SDK was added. The installed package will support the later browser initialization and event instrumentation steps.",
+        "forNextAgent": "Import the browser-only SDK as `posthog-js`. The project now declares `posthog-js` version `^1.438.12`; package-lock contains its resolved entry. Continue with client integration only unless a later task specifically establishes server-side event sending.",
+        "filesTouched": [
+          "package.json",
+          "package-lock.json"
+        ],
+        "evidence": "`npm add posthog-js` completed successfully: 12 packages added, audit completed with 0 vulnerabilities. Re-read `package.json` confirms `posthog-js: ^1.438.12`; grep confirms the `node_modules/posthog-js` lockfile entry."
+      },
+      "finishedAt": "2026-10-16T17:46:56.638Z"
+    },
+    {
+      "id": "32da2596-fcff-4e66-88a9-ca9aa6cc9e93",
+      "type": "init",
+      "label": "Initialize PostHog",
+      "status": "done",
+      "dependsOn": [],
+      "inputs": {},
+      "attempts": 1,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:12.194Z",
+      "startedAt": "2026-10-16T17:45:35.157Z",
+      "handoff": {
+        "goals": "Initialize PostHog once in the JavaScript web client, configure public environment variables through wizard tooling, and document them for developers.",
+        "did": "Added `posthog-js` to `package.json`. Created `src/lib/posthog.ts`, which reads `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST`, initializes the browser SDK once when both are configured, exports that same `posthog` instance (or `undefined` in an unconfigured production build), and throws the required clear development error when either variable is missing. Imported this module once from `src/main.tsx` before React renders. Set both Vite public environment values in `.env` through the environment tool and created `.env.example` with placeholder values. This enables default PostHog product analytics capture, including automatic pageviews/autocapture and session recording defaults.",
+        "forNextAgent": "All browser call sites must import `{ posthog }` from `src/lib/posthog.ts` and guard optional calls (for example, `posthog?.capture(...)`) because unconfigured production builds intentionally export `undefined`. Do not construct another client or call `init` elsewhere. The SDK is initialized by the side-effect import in `src/main.tsx`. No CSP exists in the inspected HTML/config, so no `script-src`, `connect-src`, or `worker-src` directives were changed. `package-lock.json` was not updated because this task's provided tool set did not include command execution; run the detected `npm add posthog-js` when dependency installation is available to synchronize the lockfile and install the manifest dependency.",
+        "filesTouched": [
+          "package.json",
+          "src/main.tsx",
+          "src/lib/posthog.ts",
+          ".env.example",
+          ".env"
+        ],
+        "evidence": "Read the final `src/lib/posthog.ts` and verified via `check_env_keys` that `VITE_POSTHOG_KEY` and `VITE_POSTHOG_HOST` are present in `.env` (and documented in `.env.example`). No builds, linters, or tests were run, as required by the task.",
+        "assumptions": "This is a Vite React browser-only app, based on the entry point and `package.json`; there are no server-side or mobile targets requiring separate SDK initialization."
+      },
+      "finishedAt": "2026-10-16T17:46:32.902Z"
+    },
+    {
+      "id": "b580c3ed-b322-4b13-9e5e-d171f241b174",
+      "type": "identify",
+      "label": "Add user identification",
+      "status": "running",
+      "dependsOn": [
+        "47818c64-82e8-413e-a7eb-512cee281e3a",
+        "32da2596-fcff-4e66-88a9-ca9aa6cc9e93"
+      ],
+      "inputs": {},
+      "attempts": 1,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:14.443Z",
+      "startedAt": "2026-10-16T17:46:58.273Z"
+    },
+    {
+      "id": "1010a42d-6a64-4a3e-b464-53231966b83c",
+      "type": "error-tracking",
+      "label": "Capture unhandled errors",
+      "status": "running",
+      "dependsOn": [
+        "47818c64-82e8-413e-a7eb-512cee281e3a",
+        "32da2596-fcff-4e66-88a9-ca9aa6cc9e93"
+      ],
+      "inputs": {},
+      "attempts": 1,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:14.446Z",
+      "startedAt": "2026-10-16T17:46:58.280Z"
+    },
+    {
+      "id": "e62fd563-b777-4f97-af3e-ebae3ec54d98",
+      "type": "capture",
+      "label": "Instrument key events",
+      "status": "pending",
+      "dependsOn": [
+        "b580c3ed-b322-4b13-9e5e-d171f241b174"
+      ],
+      "inputs": {},
+      "attempts": 0,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:17.562Z"
+    },
+    {
+      "id": "357ceadb-ab4c-4e23-a105-e7722b1ed9d6",
+      "type": "ai-observability",
+      "label": "Instrument LLM calls",
+      "status": "pending",
+      "dependsOn": [
+        "b580c3ed-b322-4b13-9e5e-d171f241b174"
+      ],
+      "inputs": {},
+      "attempts": 0,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "optional": true,
+      "createdAt": "2026-10-16T17:45:17.565Z"
+    },
+    {
+      "id": "5d206e11-f12c-471e-b7e1-2b153fe52378",
+      "type": "dashboard",
+      "label": "Create product insights",
+      "status": "pending",
+      "dependsOn": [
+        "e62fd563-b777-4f97-af3e-ebae3ec54d98"
+      ],
+      "inputs": {},
+      "attempts": 0,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:26.389Z"
+    },
+    {
+      "id": "c2091760-98f5-4fdf-b2be-008280ddc936",
+      "type": "logs",
+      "label": "Configure log capture",
+      "status": "pending",
+      "dependsOn": [
+        "357ceadb-ab4c-4e23-a105-e7722b1ed9d6"
+      ],
+      "inputs": {},
+      "attempts": 0,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "optional": true,
+      "createdAt": "2026-10-16T17:45:28.624Z"
+    },
+    {
+      "id": "d2f53893-cf60-42a6-8eac-3ef8a10a0de4",
+      "type": "review",
+      "label": "Review integration",
+      "status": "pending",
+      "dependsOn": [
+        "47818c64-82e8-413e-a7eb-512cee281e3a",
+        "32da2596-fcff-4e66-88a9-ca9aa6cc9e93",
+        "b580c3ed-b322-4b13-9e5e-d171f241b174",
+        "e62fd563-b777-4f97-af3e-ebae3ec54d98",
+        "1010a42d-6a64-4a3e-b464-53231966b83c",
+        "357ceadb-ab4c-4e23-a105-e7722b1ed9d6",
+        "c2091760-98f5-4fdf-b2be-008280ddc936"
+      ],
+      "inputs": {},
+      "attempts": 0,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:31.257Z"
+    },
+    {
+      "id": "a3587268-e0cd-4294-8587-f6f63e581f52",
+      "type": "report",
+      "label": "Summarize setup",
+      "status": "pending",
+      "dependsOn": [
+        "5d206e11-f12c-471e-b7e1-2b153fe52378",
+        "d2f53893-cf60-42a6-8eac-3ef8a10a0de4"
+      ],
+      "inputs": {},
+      "attempts": 0,
+      "maxAttempts": 2,
+      "enqueuedBy": "orchestrator",
+      "createdAt": "2026-10-16T17:45:33.208Z"
+    }
+  ]
+}
