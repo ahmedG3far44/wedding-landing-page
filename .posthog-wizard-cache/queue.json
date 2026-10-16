@@ -181,7 +181,7 @@
       "id": "c2091760-98f5-4fdf-b2be-008280ddc936",
       "type": "logs",
       "label": "Configure log capture",
-      "status": "running",
+      "status": "done",
       "dependsOn": [
         "357ceadb-ab4c-4e23-a105-e7722b1ed9d6"
       ],
@@ -191,13 +191,25 @@
       "enqueuedBy": "orchestrator",
       "optional": true,
       "createdAt": "2026-10-16T17:45:28.624Z",
-      "startedAt": "2026-10-16T17:47:32.942Z"
+      "startedAt": "2026-10-16T17:47:32.942Z",
+      "handoff": {
+        "goals": "Configure PostHog log capture for the project’s supported runtime using the matching documented JavaScript web setup, while exporting only purpose-written lines added by this task.",
+        "did": "Installed and read the logs-javascript skill and its JavaScript web reference. Configured the existing browser posthog-js initialization in src/lib/posthog.ts with log resource metadata for serviceName \"wedding-invitation-web\" and environment from import.meta.env.MODE. Added a guarded posthogLogger wrapper that uses the SDK-native logger; console log capture remains disabled, so existing browser output is not exported. Added structured, non-sensitive log records in src/components/admin/InvitationEditor.tsx only for successful invitation saves, successful resets, and local-storage failures. The records contain only the stable operation and storage fields, never invitation content, credentials, or other user data. Existing product-event capture in that component was preserved.",
+        "forNextAgent": "Required package: posthog-js >=1.368.0; it is already declared by upstream as ^1.438.12, so this task adds no dependency or manifest work. Uses existing VITE_POSTHOG_KEY and VITE_POSTHOG_HOST configuration; no environment changes were required. To verify delivery, open the admin editor, save invitation changes (or restore defaults), then look in PostHog Logs filtered to service wedding-invitation-web for the corresponding structured line. Delivery is unverified until observed. Only log lines added in this task are exported. To route existing browser console loggers into the same exporter in the future, explicitly set logs.captureConsoleLogs: true in posthog.init after auditing and approving all console output; this task intentionally did not do so.",
+        "filesTouched": [
+          "src/lib/posthog.ts",
+          "src/components/admin/InvitationEditor.tsx"
+        ],
+        "evidence": "Re-read both edited files and searched src for posthogLogger/logger usage. Confirmed the logger is only called at the added invitation save/reset outcomes and that no logs.captureConsoleLogs configuration was added. No build, lint, or runtime delivery verification was run because this task’s tool set has no command execution tool.",
+        "assumptions": "The existing Vite environment values are present as documented by the upstream initialization handoff; the log service identity is intentionally a stable browser application name and deployment environment comes from Vite mode."
+      },
+      "finishedAt": "2026-10-16T17:48:34.919Z"
     },
     {
       "id": "d2f53893-cf60-42a6-8eac-3ef8a10a0de4",
       "type": "review",
       "label": "Review integration",
-      "status": "pending",
+      "status": "running",
       "dependsOn": [
         "47818c64-82e8-413e-a7eb-512cee281e3a",
         "32da2596-fcff-4e66-88a9-ca9aa6cc9e93",
@@ -208,10 +220,11 @@
         "c2091760-98f5-4fdf-b2be-008280ddc936"
       ],
       "inputs": {},
-      "attempts": 0,
+      "attempts": 1,
       "maxAttempts": 2,
       "enqueuedBy": "orchestrator",
-      "createdAt": "2026-10-16T17:45:31.257Z"
+      "createdAt": "2026-10-16T17:45:31.257Z",
+      "startedAt": "2026-10-16T17:48:37.405Z"
     },
     {
       "id": "a3587268-e0cd-4294-8587-f6f63e581f52",
